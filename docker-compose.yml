@@ -1,0 +1,19 @@
+version: '3'
+services:
+  react_app:
+    build: ./distribucion-contenido-global
+    networks:
+      - my_network
+
+  traffic_server:
+    build: ./apache_traffic_serve
+    ports:
+      - "8080:8080"
+    depends_on:
+      - react_app
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
